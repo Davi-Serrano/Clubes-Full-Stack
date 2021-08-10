@@ -15,17 +15,6 @@ const ClubesSchema = new mongoose.Schema({
         required: true,
         lowercase: true,
     },
-    titulos: {
-        brasileiro:{
-            type: Number,
-            required: true,
-        },
-        libertadores:{
-            type: Number,
-            required: true,
-        },
-    },
-
 });
 
 

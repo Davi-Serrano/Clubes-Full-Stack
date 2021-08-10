@@ -2,25 +2,23 @@ const express = require("express");
 const router = express.Router();
 const Clube = require("../models/Clubes");
 
+router.use(express.json())
+
 router.post("/info", async (req, res) => {
 
-    const { nome }  = req.body
 
-    try {
-        
-        if (await Clube.findOne({ nome })) {
-            return res.status(400).send({error: "Clube já cadastrado"})
-        }
-        
-        const clube = await Clube.create(req.body);
-        return res.send({
-            clube
-        });
-        
+    const newClube = {
+        nome: req.body.nome,
+        imagem: req.body.imagem,
+        nascimento: req.body.nascimento,
+ 
     }
-        catch (err) {
-        res.status(400).send("erro ao cadastrar")
-    }
+
+    new Clube(newClube).save().then(() => {
+        console.log("Salvo com sucesso")
+    }).catch((err) => {
+        console.log(err)
+    })
 
 })
 

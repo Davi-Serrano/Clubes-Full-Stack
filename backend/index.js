@@ -2,10 +2,13 @@ const express = require('express')
 const app = express()
 const mongoose = require("mongoose")
 const usuarios = require("./router/usuario")
+const cors = require("cors")
+
+app.use(cors())
 
 
 //config mongoose
-mongoose.connect('mongodb://localhost/Clubesinfo', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true}).then(()=> {
+mongoose.connect('mongodb://localhost/testedoteste', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true}).then(()=> {
     console.log('MongoDB conectado')
 }).catch((err)=> {
     console.log('Erro ao se conectar: ' + err)
