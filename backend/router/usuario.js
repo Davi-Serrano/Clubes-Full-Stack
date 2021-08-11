@@ -48,22 +48,24 @@ router.get("/show/:id", (req, res) => {
 
 
 
-router.put("/change", async (req, res) => {
+router.put("/change", (req, res) =>{
 
+    
+    Clube.findOne({_id: req.body.id}).then((clube) => {
+        
+        clube.nome = req.body.nome
+        clube.imagem =  req.body.imagem
+        clube.nascimento = req.body.nascimento
+        
+        clube.save().then( () =>{   
+           console.log("Modificado com sucesso")
 
-    const newClube = {
-        nome: req.body.nome,
-        imagem: req.body.imagem,
-        nascimento: req.body.nascimento,
- 
-    }
+       }).catch( (err) =>{
+        console.log("Houve em erro" + err )
 
-    new Clube(newClube).save().then(() => {
-        console.log("Editado e salvo com sucesso")
-    }).catch((err) => {
-        console.log(err)
+       })
+    
     })
-
 })
 
 module.exports = router

@@ -4,11 +4,6 @@ import { useParams } from "react-router-dom"
 
 export default function Uptade() {
 
-    const [ clube, setClube ] = useState({clube:{
-        nome: "loading...",
-        imagem: "loading...",
-        nascimento: "loading...",
-    }})
     const [ nome, setNome ] = useState("")
     const [ imagem, setImagem ] = useState("")
     const [ nascimento, setNascimento ] = useState("")
@@ -17,7 +12,6 @@ export default function Uptade() {
 
   async  function getClubeData() {
         await axios.get(`http://localhost:8000/show/${id}`).then( (res)=>{
-            setClube(res.data)
             
         }).catch( (erro)=>{
             console.log("Houve um erro" + erro)
@@ -28,12 +22,11 @@ export default function Uptade() {
     useEffect(() => {
         getClubeData()
     }, [])
-
-    console.log(clube)
   
     async function uptadeClube (){
     
           await  axios.put(`http://localhost:8000/change`, {
+                id:id,
                 nome: nome,
                 imagem: imagem,
                 nascimento: nascimento,
@@ -45,18 +38,19 @@ export default function Uptade() {
        
     }
 
-    console.log(nascimento)
+
+    console.log(nome)
     return (
         <div>
-       
-              <input value={clube.clube.nome} onChange={e => setNome(e.target.value)}/>
-              <input value={clube.clube.imagem} onChange={e => setImagem(e.target.value)}/>
-              <input value={clube.clube.nascimento}  onChange={e => setNascimento(e.target.value)}/>
+        <form>
+              <input type="text" onChange={e => setNome(e.target.value)}/>
+              <input type="text" onChange={e => setImagem(e.target.value)}/>
+              <input type="text" onChange={e => setNascimento(e.target.value)}/>
 
               <div onClick={uptadeClube}>Enviar</div>      
               <a href="/show">Read</a>    
 
-     
+        </form>
   </div>
     )
 }
