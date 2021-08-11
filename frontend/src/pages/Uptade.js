@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { Redirect, useParams } from "react-router-dom"
 
 export default function Uptade() {
 
@@ -32,14 +32,18 @@ export default function Uptade() {
                 nascimento: nascimento,
             }).then(() => {
                 console.log("sucesso")
+                window.location("/show")
             }).catch((err) => {
                 console.log(err)
             })
        
     }
 
-
-    console.log(nome)
+    function deleteClube(){
+        axios.post("http://localhost:8000/del",{
+            id:id
+        })
+    }
     return (
         <div>
         <form>
@@ -49,6 +53,7 @@ export default function Uptade() {
 
               <div onClick={uptadeClube}>Enviar</div>      
               <a href="/show">Read</a>    
+              <div onClick={deleteClube}>Excluir</div>  
 
         </form>
   </div>

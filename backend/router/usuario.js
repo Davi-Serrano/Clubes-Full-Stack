@@ -68,6 +68,15 @@ router.put("/change", (req, res) =>{
     })
 })
 
+router.post("/del", (req, res) =>{
+
+    Clube.deleteOne({_id: req.body.id}).then(() => {
+        console.log("Deletado com sucesso")
+    }).catch((err) =>{
+        console.log(err)
+    })
+})
+
 module.exports = router
 
 
