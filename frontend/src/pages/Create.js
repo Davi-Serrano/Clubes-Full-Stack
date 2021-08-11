@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import axios from "axios"
 
-export default function Postagem() {
+export default function Create() {
     const [nome, setNome] = useState("")
     const [imagem, setImagem] = useState("")
     const [nascimento, setNascimento] = useState("")
 
 
-    function postTime() {
-        axios.post("http://localhost:8000/info", {
+  async  function createClube() {
+       await axios.post("http://localhost:8000/info", {
             nome: nome,
             imagem: imagem,
             nascimento: nascimento,
@@ -25,7 +25,8 @@ export default function Postagem() {
                     <input onChange={e => setImagem(e.target.value)}/>
                     <input onChange={e => setNascimento(e.target.value)}/>
 
-                    <div onClick={postTime}>Enviar</div>          
+                    <div onClick={createClube}>Enviar</div>      
+                    <a href="/show">Read</a>    
 
               </form>
         </div>

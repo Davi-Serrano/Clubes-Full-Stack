@@ -1,16 +1,25 @@
 
 import {BrowserRouter, Route, Switch} from "react-router-dom"
+import ClubesProvider from "./Context/Clubes";
 
-import  Postagem from "./pages/postagem"
-import Mostrar from "./pages/Mostrar"
+import  Create from "./pages/Create"
+import Read from "./pages/Read"
+import Uptade from "./pages/Uptade";
+
 
 function App() {
   
   return (
      <BrowserRouter>
       <Switch>
-        <Route path="/" exact={true} component={Postagem} />
-        <Route path="/show" exact={true} component={Mostrar} />   
+        <ClubesProvider>
+          
+        <Route path="/" exact={true} component={Create} />
+        <Route path="/edit/:id"  component={Uptade} />
+        <Route path="/show" exact={true} component={Read} />
+      
+        </ClubesProvider>
+        
        </Switch>     
      </BrowserRouter>
 
