@@ -1,26 +1,20 @@
-import { useState } from "react"
-import axios from "axios"
+
+import {BrowserRouter, Route, Switch} from "react-router-dom"
 
 import  Postagem from "./pages/postagem"
+import Mostrar from "./pages/Mostrar"
 
 function App() {
-  const [times, setTimes] = useState([])
-
-
-  async function showTime() {
-    await axios.get("http://localhost:8000/show").then(res => {
-      setTimes(res.data)
-      console.log(times[0].nome)
-    })
-  }
-
-
+  
   return (
-     <div className = "App" >
-       <Postagem />
-        <div onClick = {showTime}> Mostart </div>
+     <BrowserRouter>
+      <Switch>
+        <Route path="/" exact={true} component={Postagem} />
+        <Route path="/show" exact={true} component={Mostrar} />   
+       </Switch>     
+     </BrowserRouter>
 
-    </div>
+    
   );
 }
 
