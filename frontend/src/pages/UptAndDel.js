@@ -1,8 +1,9 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
-import { Redirect, useParams } from "react-router-dom"
+import {  useParams } from "react-router-dom"
+import { Form, Section, Button } from "./styled"
 
-export default function Uptade() {
+export default function UptAndDel() {
 
     const [ nome, setNome ] = useState("")
     const [ imagem, setImagem ] = useState("")
@@ -23,7 +24,7 @@ export default function Uptade() {
         getClubeData()
     }, [])
   
-    async function uptadeClube (){
+    async function handleSumbmit (){
     
           await  axios.put(`http://localhost:8000/change`, {
                 id:id,
@@ -45,17 +46,19 @@ export default function Uptade() {
         })
     }
     return (
-        <div>
-        <form>
-              <input type="text" onChange={e => setNome(e.target.value)}/>
-              <input type="text" onChange={e => setImagem(e.target.value)}/>
-              <input type="text" onChange={e => setNascimento(e.target.value)}/>
+   
+        <Form>
+                <input type="text" onChange={e => setNome(e.target.value)}/>
+                <input type="text" onChange={e => setImagem(e.target.value)}/>
+                <input type="text" onChange={e => setNascimento(e.target.value)}/>
+            
+                <Section>
+                    <Button onClick={handleSumbmit}>Editar</Button>      
+                    <Button> <a href="/show">Clubes</a>  </Button>
+                    <Button onClick={deleteClube}>Excluir</Button>  
+                </Section>
 
-              <div onClick={uptadeClube}>Enviar</div>      
-              <a href="/show">Read</a>    
-              <div onClick={deleteClube}>Excluir</div>  
+        </Form>
 
-        </form>
-  </div>
     )
 }
